@@ -167,8 +167,12 @@ public final class JsonDiff {
             jsonNode.put(Constants.FROM, getArrayNodeRepresentation(diff.getPath())); //required {from} only in case of Move Operation
             jsonNode.put(Constants.PATH, getArrayNodeRepresentation(diff.getToPath()));  // destination Path
         }
-        if (!Operation.REMOVE.equals(diff.getOperation()) && !Operation.MOVE.equals(diff.getOperation())) { // setting only for Non-Remove operation
-            jsonNode.put(Constants.VALUE, diff.getValue());
+
+        // setting value for all operations
+        jsonNode.put(Constants.VALUE, diff.getValue());
+
+        if (Operation.REPLACE.equals(diff.getOperation())) { // setting oldValue only for Replace operation
+            jsonNode.put(Constants.OLDVALUE, diff.getOldValue());
         }
         return jsonNode;
     }
@@ -193,7 +197,7 @@ public final class JsonDiff {
             } else {
                 //can be replaced
 
-                diffs.add(Diff.generateDiff(Operation.REPLACE, path, target));
+                diffs.add(Diff.generateDiff(Operation.REPLACE, path, target, source));
             }
         }
     }

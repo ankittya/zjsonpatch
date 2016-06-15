@@ -9,6 +9,7 @@ package com.flipkart.zjsonpatch;
 final class Constants {
     public static String OP = "op";
     public static String VALUE = "value";
+    public static String OLDVALUE = "oldValue";
     public static String PATH = "path";
     public static String FROM = "from";
 

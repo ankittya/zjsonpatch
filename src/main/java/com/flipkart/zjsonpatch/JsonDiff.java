@@ -178,7 +178,7 @@ public final class JsonDiff {
     }
 
     private static String getArrayNodeRepresentation(List<Object> path) {
-        return Joiner.on('/').appendTo(new StringBuilder().append('/'),
+        return Joiner.on('.').appendTo(new StringBuilder(),
                 Iterables.transform(path, ENCODE_PATH_FUNCTION)).toString();
     }
 
